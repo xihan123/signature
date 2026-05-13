@@ -194,8 +194,14 @@
             cy = e.clientY;
         }
         var rect = signCanvas.getBoundingClientRect();
-        return {x: (cx - rect.left) / rect.width * wrapper.clientWidth,
-                y: (cy - rect.top) / rect.height * wrapper.clientHeight};
+        var landscape = document.querySelector('.container').classList.contains('landscape-mode');
+        if (landscape) {
+            return {
+                x: (cy - rect.top) / rect.height * wrapper.clientWidth,
+                y: (rect.right - cx) / rect.width * wrapper.clientHeight
+            };
+        }
+        return {x: cx - rect.left, y: cy - rect.top};
     }
 
     function startDraw(e) {
