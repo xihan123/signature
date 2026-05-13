@@ -1,5 +1,13 @@
 {
   "name": "handwriting-signature",
   "version": "1.0.0",
-  "private": true
+  "private": true,
+  "description": "基于 Canvas 的手写签名工具",
+  "author": "xihan123",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xihan123/signature.git"
+  },
+  "homepage": "https://www.xihan.website"
 }

@@ -247,6 +247,24 @@ canvas {
     transform: translateX(-50%) translateY(0);
 }
 
+.footer {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    font-size: 0.78rem;
+    color: #b0a49a;
+}
+
+.footer a {
+    color: #9a8e86;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer a:hover {
+    color: var(--accent);
+}
+
 @media (max-width: 500px) {
     .container {
         padding: 16px 12px 14px;
@@ -313,5 +331,10 @@ canvas {
     .landscape-mode .btn {
         padding: 6px 12px;
         font-size: 0.78rem;
+    }
+
+    .landscape-mode .footer {
+        font-size: 0.7rem;
+        gap: 10px;
     }
 }
