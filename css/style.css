@@ -123,6 +123,10 @@ body {
     display: none;
 }
 
+.hidden-mobile {
+    display: none;
+}
+
 .pen-size-val {
     min-width: 18px;
     display: inline-block;
@@ -256,5 +260,58 @@ canvas {
     .btn {
         padding: 8px 13px;
         font-size: 0.82rem;
+    }
+
+    .hidden-mobile {
+        display: flex;
+    }
+
+    .landscape-mode {
+        position: fixed;
+        top: 0;
+        left: 100vw;
+        width: 100vh;
+        height: 100vw;
+        max-width: none;
+        transform: rotate(90deg);
+        transform-origin: top left;
+        border-radius: 0;
+        padding: 10px 14px;
+        gap: 6px;
+        z-index: 1000;
+    }
+
+    .landscape-mode .header {
+        font-size: 1rem;
+        gap: 6px;
+    }
+
+    .landscape-mode .header .icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .landscape-mode .settings {
+        padding: 6px 10px;
+        gap: 6px;
+    }
+
+    .landscape-mode .setting {
+        font-size: 0.78rem;
+    }
+
+    .landscape-mode .canvas-wrapper {
+        aspect-ratio: unset;
+        flex: 1;
+        min-height: 0;
+    }
+
+    .landscape-mode .actions {
+        gap: 8px;
+    }
+
+    .landscape-mode .btn {
+        padding: 6px 12px;
+        font-size: 0.78rem;
     }
 }

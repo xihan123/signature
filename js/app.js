@@ -19,6 +19,7 @@
     var btnClear = document.getElementById('btnClear');
     var btnExport = document.getElementById('btnExport');
     var toast = document.getElementById('toast');
+    var landscapeToggle = document.getElementById('landscapeToggle');
 
     var penColor = penColorInput.value;
     var penSize = parseInt(penSizeInput.value, 10);
@@ -114,10 +115,9 @@
 
     // resize
     function resize() {
-        var rect = wrapper.getBoundingClientRect();
         var dpr = window.devicePixelRatio || 1;
-        var w = rect.width;
-        var h = rect.height;
+        var w = wrapper.clientWidth;
+        var h = wrapper.clientHeight;
 
         var temp = document.createElement('canvas');
         temp.width = signCanvas.width;
@@ -182,7 +182,6 @@
 
     // coords
     function getPos(e) {
-        var rect = signCanvas.getBoundingClientRect();
         var cx, cy;
         if (e.touches && e.touches.length) {
             cx = e.touches[0].clientX;
@@ -194,7 +193,9 @@
             cx = e.clientX;
             cy = e.clientY;
         }
-        return {x: cx - rect.left, y: cy - rect.top};
+        var rect = signCanvas.getBoundingClientRect();
+        return {x: (cx - rect.left) / rect.width * wrapper.clientWidth,
+                y: (cy - rect.top) / rect.height * wrapper.clientHeight};
     }
 
     function startDraw(e) {
@@ -306,19 +307,17 @@
             drawGrid();
         };
 
-        gridRowsInput.oninput = function () {
+        gridRowsInput.onchange = function () {
             var v = parseInt(gridRowsInput.value, 10);
-            if (isNaN(v) || v < 1) v = 1;
-            if (v > 10) v = 10;
-            gridRowsInput.value = v;
+            if (isNaN(v) || v < 1) { v = 1; gridRowsInput.value = 1; }
+            if (v > 10) { v = 10; gridRowsInput.value = 10; }
             gridRows = v;
             if (showGrid) drawGrid();
         };
-        gridColsInput.oninput = function () {
+        gridColsInput.onchange = function () {
             var v = parseInt(gridColsInput.value, 10);
-            if (isNaN(v) || v < 1) v = 1;
-            if (v > 10) v = 10;
-            gridColsInput.value = v;
+            if (isNaN(v) || v < 1) { v = 1; gridColsInput.value = 1; }
+            if (v > 10) { v = 10; gridColsInput.value = 10; }
             gridCols = v;
             if (showGrid) drawGrid();
         };
@@ -333,6 +332,16 @@
         btnUndo.onclick = undo;
         btnClear.onclick = clear;
         btnExport.onclick = exportImage;
+
+        landscapeToggle.onchange = function () {
+            var container = document.querySelector('.container');
+            if (landscapeToggle.checked) {
+                container.classList.add('landscape-mode');
+            } else {
+                container.classList.remove('landscape-mode');
+            }
+            setTimeout(resize, 300);
+        };
 
         window.addEventListener('resize', function () {
             clearTimeout(window._rt);
