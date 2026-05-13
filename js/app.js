@@ -194,14 +194,16 @@
             cy = e.clientY;
         }
         var rect = signCanvas.getBoundingClientRect();
-        var landscape = document.querySelector('.container').classList.contains('landscape-mode');
+        var landscape = document.querySelector('.container').classList.contains('landscape-mode')
+            && window.matchMedia('(max-width: 500px)').matches;
         if (landscape) {
             return {
                 x: (cy - rect.top) / rect.height * wrapper.clientWidth,
                 y: (rect.right - cx) / rect.width * wrapper.clientHeight
             };
         }
-        return {x: cx - rect.left, y: cy - rect.top};
+        return {x: (cx - rect.left) / rect.width * wrapper.clientWidth,
+                y: (cy - rect.top) / rect.height * wrapper.clientHeight};
     }
 
     function startDraw(e) {
